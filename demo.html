@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<!-- <script src="/visible_gallery/build/static/js/main.14d6059d.js"></script> -->
+
+<body>
+    <div class="box"></div>
+    <script>
+        function loadScript(url, callback) {
+            var script = document.createElement('script');
+            script.src = url;
+            script.onload = callback;
+            script.onerror = function () {
+                console.error('Failed to load script:', url);
+            };
+            document.head.appendChild(script);
+        }
+
+        loadScript('/visible_gallery/build/static/js/main.55965cab.js', function () {
+            if (typeof window.renderGallery === 'function') {
+                console.log("renderGallery function is available, calling it now...");
+                renderGallery('.box', '23648726487');
+            } else {
+                console.error('renderGallery function is not available');
+            }
+        });
+    </script>
+</body>
+
+</html>
