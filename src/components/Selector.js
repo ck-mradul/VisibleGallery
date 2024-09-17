@@ -28,7 +28,7 @@ const Selector = () => {
   // const [loading, setLoading] = useState(true); // State to manage loading
   // const [error, setError] = useState(null); // State to handle errors
   useEffect(() => {
-    const fetchSingleGallerys = async (id = 1) => {
+    const fetchSingleGallerys = async (id = 2) => {
       try {
         const response = await axiosInstance.post(
           `/getLayoutWithGalleryCordinates?layout_id=${id}`
@@ -127,14 +127,15 @@ const Selector = () => {
         // <div style={{ overflow: "hidden", width: "32%" }}>
         <div
           style={{
-            overflow: "auto", // Allow auto scrolling only if necessary
+            border: "2px solid red",
+            overflow: "hidden", // Allow auto scrolling only if necessary
             maxWidth: "100vw", // Limit the container width to the viewport
             maxHeight: "100vh", // Limit the height to prevent vertical scroll
             display: "flex", // Flexbox to center the gallery
             justifyContent: "center", // Horizontal centering
             padding: "10px", // Reduce padding to prevent excess space
             boxSizing: "border-box", // Ensure padding and border are included
-            backgroundColor: "#f4f4f4", // Optional: background color
+            // backgroundColor: "#f4f4f4", // Optional: background color
           }}
         >
           <GridGallery data={data} />
@@ -145,13 +146,13 @@ const Selector = () => {
         <div
           style={{
             overflow: "auto", // Allow auto scrolling only if necessary
-            maxWidth: "100vw", // Limit the container width to the viewport
-            maxHeight: "100vh", // Limit the height to prevent vertical scroll
+            maxWidth: "90vw", // Limit the container width to the viewport
+            maxHeight: "90vh", // Limit the height to prevent vertical scroll
             display: "flex", // Flexbox to center the gallery
             justifyContent: "center", // Horizontal centering
             padding: "10px", // Reduce padding to prevent excess space
             boxSizing: "border-box", // Ensure padding and border are included
-            backgroundColor: "#f4f4f4", // Optional: background color
+            // backgroundColor: "#f4f4f4", // Optional: background color
           }}
         >
           <MyMasonary data={data} />;
@@ -165,20 +166,51 @@ const Selector = () => {
             overflow: "auto", // Allow auto scrolling only if necessary
             maxWidth: "100vw", // Limit the container width to the viewport
             maxHeight: "100vh", // Limit the height to prevent vertical scroll
-            display: "flex", // Flexbox to center the gallery
+            // display: "flex", // Flexbox to center the gallery
             justifyContent: "center", // Horizontal centering
             padding: "10px", // Reduce padding to prevent excess space
             boxSizing: "border-box", // Ensure padding and border are included
-            backgroundColor: "#f4f4f4", // Optional: background color
+            // backgroundColor: "#f4f4f4", // Optional: background color
           }}
         >
           <CollageGallery data={data} />;
         </div>
       );
     case 4:
-      return <SliderGallery data={data} />;
+      return (
+        <div
+          style={{
+            overflow: "auto", // Allow auto scrolling only if necessary
+            maxWidth: "100vw", // Limit the container width to the viewport
+            maxHeight: "100vh", // Limit the height to prevent vertical scroll
+            display: "flex", // Flexbox to center the gallery
+            justifyContent: "center", // Horizontal centering
+            padding: "10px", // Reduce padding to prevent excess space
+            // boxSizing: "border-box", // Ensure padding and border are included
+            // backgroundColor: "#f4f4f4", // Optional: background color
+          }}
+        >
+          <SliderGallery data={data} />
+        </div>
+      );
     case 5:
-      return <ListGallery data={data} />;
+      return (
+        <div
+          style={{
+            overflow: "auto", // Allow auto scrolling only if necessary
+            maxWidth: "100vw", // Limit the container width to the viewport
+            maxHeight: "100vh", // Limit the height to prevent vertical scroll
+            display: "flex", // Flexbox to center the gallery
+            justifyContent: "center", // Horizontal centering
+            padding: "10px", // Reduce padding to prevent excess space
+            boxSizing: "border-box", // Ensure padding and border are included
+            // backgroundColor: "#f4f4f4", // Optional: background color
+          }}
+        >
+          <ListGallery data={data} />;
+        </div>
+      );
+
     default:
       return null;
   }
