@@ -38,35 +38,6 @@ const GridGallery = ({ data }) => {
     };
   }, [data]);
 
-  // const calculateScaledCoordinates = (product, index) => {
-  //   const { coordinate_x, coordinate_y } = product;
-  //   const imageSizeNew = imageSize[index] || { width: 1, height: 1 };
-
-  //   const originalWidth = 1000; // Define the original image width
-  //   const originalHeight = 1000; // Define the original image height
-  //   const scaleX = imageSizeNew.width / originalWidth;
-  //   const scaleY = imageSizeNew.height / originalHeight;
-
-  //   const adjustedX = coordinate_x * scaleX;
-  //   const adjustedY = coordinate_y * scaleY;
-
-  //   return { top: adjustedY, left: adjustedX };
-  // };
-
-  // const calculateScaledCoordinates = (
-  //   product,
-  //   imageSize = { width: 1, height: 1 }
-  // ) => {
-  //   const { coordinate_x, coordinate_y } = product;
-  //   const { width, height } = imageSize;
-
-  //   // Convert percentage coordinates to pixel values based on image size
-  //   const adjustedX = (coordinate_x / 100) * width;
-  //   const adjustedY = (coordinate_y / 100) * height;
-
-  //   return { top: adjustedY, left: adjustedX };
-  // };
-
   return (
     <ImageList
       sx={{
@@ -84,7 +55,7 @@ const GridGallery = ({ data }) => {
         return (
           <ImageListItem key={item?.id}>
             <Slide duration={slideDurations[index]} bottom>
-              <div style={{ position: "relative", border: "2px solid" }}>
+              <div style={{ position: "relative" }}>
                 <img
                   // ref={(el) => setRef(index, el)}
                   src={item?.file_name}

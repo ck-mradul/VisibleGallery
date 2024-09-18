@@ -12,8 +12,8 @@ const SliderGallery = ({ data }) => {
         style={{
           position: "absolute",
           top: "95%",
-          right: "30%",
-          transform: "translateY(-50%)",
+          right: "40%",
+          transform: "translateX(-50%)",
           zIndex: 1,
           cursor: "pointer",
         }}
@@ -30,8 +30,8 @@ const SliderGallery = ({ data }) => {
         style={{
           position: "absolute",
           top: "95%",
-          left: "30%",
-          transform: "translateY(-50%)",
+          left: "20%",
+          transform: "translateX(-50%)",
           zIndex: 1,
           cursor: "pointer",
         }}
@@ -96,13 +96,25 @@ const SliderGallery = ({ data }) => {
           // height: "320px",
           maxWidth: "30%",
           maxHeight: "20%",
+          padding: "40px 0", // Optional padding for vertical centering
+
+          margin: "auto auto", // Center the slider horizontally
+
           // margin: "10px 10px",
         }}
+
+        // style={{
+        //   position: "relative",
+        //   maxWidth: "100%", // Ensure slider is responsive
+        //   maxHeight: "auto",
+        //   margin: "0 auto", // Center the slider horizontally
+        //   padding: "40px 0", // Optional padding for vertical centering
+        // }}
       >
         <Slider
           {...settings}
           style={{
-            width: "100%",
+            width: "95%",
           }}
         >
           {data?.image?.map((item, index) => (
@@ -157,7 +169,7 @@ const SliderGallery = ({ data }) => {
                               filter: "drop-shadow(0 0 5px rgba(0, 0, 0, 0.7))",
                             }}
                           />
-                          
+
                           {
                             <div
                               style={{
@@ -166,7 +178,9 @@ const SliderGallery = ({ data }) => {
                                 position: "absolute",
                                 top: "-120%",
                                 left: "50%",
-                                transform: "translateX(-50%)",
+                                // transform: "translateX(-50%)",
+                                transform: "scale(1)",
+
                                 backgroundColor: "white",
                                 border: "1px solid #ccc",
                                 boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",

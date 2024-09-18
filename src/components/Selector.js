@@ -28,7 +28,7 @@ const Selector = () => {
   // const [loading, setLoading] = useState(true); // State to manage loading
   // const [error, setError] = useState(null); // State to handle errors
   useEffect(() => {
-    const fetchSingleGallerys = async (id = 2) => {
+    const fetchSingleGallerys = async (id = 5) => {
       try {
         const response = await axiosInstance.post(
           `/getLayoutWithGalleryCordinates?layout_id=${id}`
@@ -127,10 +127,9 @@ const Selector = () => {
         // <div style={{ overflow: "hidden", width: "32%" }}>
         <div
           style={{
-            border: "2px solid red",
             overflow: "hidden", // Allow auto scrolling only if necessary
-            maxWidth: "100vw", // Limit the container width to the viewport
-            maxHeight: "100vh", // Limit the height to prevent vertical scroll
+            maxWidth: "100%", // Limit the container width to the viewport
+            maxHeight: "100%", // Limit the height to prevent vertical scroll
             display: "flex", // Flexbox to center the gallery
             justifyContent: "center", // Horizontal centering
             padding: "10px", // Reduce padding to prevent excess space
@@ -145,9 +144,9 @@ const Selector = () => {
       return (
         <div
           style={{
-            overflow: "auto", // Allow auto scrolling only if necessary
-            maxWidth: "90vw", // Limit the container width to the viewport
-            maxHeight: "90vh", // Limit the height to prevent vertical scroll
+            overflow: "hidden", // Allow auto scrolling only if necessary
+            maxWidth: "100%", // Limit the container width to the viewport
+            maxHeight: "100%", // Limit the height to prevent vertical scroll
             display: "flex", // Flexbox to center the gallery
             justifyContent: "center", // Horizontal centering
             padding: "10px", // Reduce padding to prevent excess space
@@ -164,8 +163,8 @@ const Selector = () => {
         <div
           style={{
             overflow: "auto", // Allow auto scrolling only if necessary
-            maxWidth: "100vw", // Limit the container width to the viewport
-            maxHeight: "100vh", // Limit the height to prevent vertical scroll
+            maxWidth: "100%", // Limit the container width to the viewport
+            maxHeight: "100%", // Limit the height to prevent vertical scroll
             // display: "flex", // Flexbox to center the gallery
             justifyContent: "center", // Horizontal centering
             padding: "10px", // Reduce padding to prevent excess space
@@ -181,9 +180,9 @@ const Selector = () => {
         <div
           style={{
             overflow: "auto", // Allow auto scrolling only if necessary
-            maxWidth: "100vw", // Limit the container width to the viewport
-            maxHeight: "100vh", // Limit the height to prevent vertical scroll
-            display: "flex", // Flexbox to center the gallery
+            maxWidth: "100%", // Limit the container width to the viewport
+            maxHeight: "100%", // Limit the height to prevent vertical scroll
+            // display: "flex", // Flexbox to center the gallery
             justifyContent: "center", // Horizontal centering
             padding: "10px", // Reduce padding to prevent excess space
             // boxSizing: "border-box", // Ensure padding and border are included
