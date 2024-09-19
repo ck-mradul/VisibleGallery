@@ -12,17 +12,17 @@ const CollageGallery = ({ data }) => {
         padding: "40px",
         margin: `${data?.layout?.space_bt_img}px !important`,
         gap: `${data?.layout?.space_bt_img}px !important`,
-        overflow: "hidden",
+        overflow: "visible", // Change to visible
       }}
       variant="masonry"
-      cols={2}
+      cols={3}
       gap={8}
     >
       {data?.image.map((file, index) => (
         <ImageListItem
           key={file.img}
-          cols={index === 0 || index === data?.image.length - 1 ? 2 : 1}
-          rows={index === 0 || index === data?.image.length - 1 ? 2 : 1}
+          cols={index === 0 || index === data?.image?.length - 1 ? 2 : 1}
+          rows={index === 0 || index === data?.image?.length - 1 ? 2 : 1}
         >
           {/* <Slide duration={slideDurations[index]} bottom>
             <div style={{ position: "relative" }}> */}
@@ -60,6 +60,7 @@ const CollageGallery = ({ data }) => {
                     const preview =
                       e.currentTarget.querySelector(".tag-preview");
                     preview.style.display = "block";
+                    // preview.style.removeProperty("display"); // Remove display property on hover
 
                     const icon = e.currentTarget.querySelector(".tooltipicon");
                     icon.style.display = "none";
@@ -92,16 +93,48 @@ const CollageGallery = ({ data }) => {
                       top: "-120%",
                       left: "50%",
                       // transform: "translateX(-50%)",
-                      backgroundColor: "white",
                       transform: "scale(1)",
 
+                      backgroundColor: "white",
                       border: "1px solid #ccc",
                       boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
                       padding: "5px",
-                      zIndex: 999,
+                      zIndex: 1000,
                       width: "140px",
                       textAlign: "center",
                     }}
+                    // style={{
+                    //   borderRadius: "10px",
+                    //   display: "none",
+                    //   position: "absolute",
+                    //   top: "-160%",
+                    //   left: "50%",
+                    //   // transform: "translateX(-50%)",
+                    //   transform: "scale(1)",
+                    //   backgroundColor: "white",
+                    //   border: "1px solid #ccc",
+                    //   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                    //   padding: "5px",
+                    //   zIndex: 9999,
+                    //   width: "140px",
+                    //   textAlign: "center",
+                    // }}
+                    // style={{
+                    //   borderRadius: "10px",
+                    //   display: "none",
+                    //   position: "absolute",
+                    //   top: "-120%",
+                    //   left: "50%",
+                    //   // transform: "translateX(-50%)",
+                    //   backgroundColor: "white",
+                    //   transform: "scale(1)",
+                    //   border: "1px solid #ccc",
+                    //   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                    //   padding: "5px",
+                    //   width: "140px",
+                    //   zIndex: 999,
+                    //   textAlign: "center",
+                    // }}
                     className="tag-preview"
                   >
                     <img
@@ -151,17 +184,6 @@ const CollageGallery = ({ data }) => {
           </Slide> */}
         </ImageListItem>
       ))}
-
-      {/* {itemData.map((item) => (
-        <ImageListItem key={item.img}>
-          <img
-            srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-            src={`${item.img}?w=248&fit=crop&auto=format`}
-            alt={item.title}
-            loading="lazy"
-          />
-        </ImageListItem>
-      ))} */}
     </ImageList>
   );
 };

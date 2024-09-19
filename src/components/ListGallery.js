@@ -34,7 +34,7 @@ const ListGallery = ({ data }) => {
 
                   width: "100%",
                   height: "100%",
-                  objectFit: "cover",
+                  objectFit: "fill",
                   borderRadius: `${data?.layout?.border_round}%`,
                 }}
               />

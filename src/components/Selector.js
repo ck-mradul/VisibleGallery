@@ -28,7 +28,7 @@ const Selector = () => {
   // const [loading, setLoading] = useState(true); // State to manage loading
   // const [error, setError] = useState(null); // State to handle errors
   useEffect(() => {
-    const fetchSingleGallerys = async (id = 5) => {
+    const fetchSingleGallerys = async (id = 2) => {
       try {
         const response = await axiosInstance.post(
           `/getLayoutWithGalleryCordinates?layout_id=${id}`
@@ -157,7 +157,6 @@ const Selector = () => {
           <MyMasonary data={data} />;
         </div>
       );
-
     case 3:
       return (
         <div
@@ -165,15 +164,19 @@ const Selector = () => {
             overflow: "auto", // Allow auto scrolling only if necessary
             maxWidth: "100%", // Limit the container width to the viewport
             maxHeight: "100%", // Limit the height to prevent vertical scroll
+            // position:"sticky",
             // display: "flex", // Flexbox to center the gallery
+            // flexWrap: "wrap",
             justifyContent: "center", // Horizontal centering
             padding: "10px", // Reduce padding to prevent excess space
             boxSizing: "border-box", // Ensure padding and border are included
             // backgroundColor: "#f4f4f4", // Optional: background color
+            zIndex: "-1",
           }}
         >
-          <CollageGallery data={data} />;
+          <CollageGallery data={data} />
         </div>
+        // <CollageGallery data={data} />
       );
     case 4:
       return (
@@ -213,15 +216,6 @@ const Selector = () => {
     default:
       return null;
   }
-
-  // return (
-  //   <div className="my-component">
-  //     <h1>Visible Gallery{id}</h1>
-  //     <button className="my-button" onClick={() => handleClick(id)}>
-  //       Click Me
-  //     </button>
-  //   </div>
-  // );
 };
 
 export default Selector;
