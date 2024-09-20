@@ -47,12 +47,14 @@ const SliderGallery = ({ data }) => {
     borderSize,
     selectedColor,
     borderRoundness,
+    img_in_column,
   }) => {
+    console.log("selectedImagesColumn", img_in_column);
     const settings = {
       dots: false,
       infinite: true,
       speed: 500,
-      slidesToShow: 1,
+      slidesToShow: parseInt(img_in_column, 10) || 1,
       nextArrow: <NextArrow />,
       prevArrow: <PrevArrow />,
       slidesToScroll: 1,
@@ -61,7 +63,7 @@ const SliderGallery = ({ data }) => {
         {
           breakpoint: 1024,
           settings: {
-            slidesToShow: 1,
+            slidesToShow: parseInt(img_in_column, 10) || 1,
             slidesToScroll: 1,
             initialSlide: 1,
             infinite: true,
@@ -71,7 +73,7 @@ const SliderGallery = ({ data }) => {
         {
           breakpoint: 600,
           settings: {
-            slidesToShow: 1,
+            slidesToShow: parseInt(img_in_column, 10) || 1,
             slidesToScroll: 1,
             initialSlide: 1,
           },
@@ -250,6 +252,7 @@ const SliderGallery = ({ data }) => {
       //   handleImageClick={handleImageClick}
       borderSize={data?.layout?.border_size}
       selectedColor={data?.layout?.border_color}
+      img_in_column={data?.layout?.img_in_column}
       borderRoundness={data?.layout?.border_round}
     />
   );

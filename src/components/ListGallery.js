@@ -17,6 +17,8 @@ const ListGallery = ({ data }) => {
               style={{
                 border: `solid ${data?.layout?.border_size}px ${data?.layout?.border_color}`,
                 borderRadius: `${data?.layout?.border_round}%`,
+                marginTop: `${data?.layout?.space_bt_img}%`,
+                marginBottom: `${data?.layout?.space_bt_img}%`,
                 // height: "100px",
                 width: "500px",
                 height: "500px",

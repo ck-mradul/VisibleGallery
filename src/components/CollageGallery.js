@@ -9,10 +9,10 @@ const CollageGallery = ({ data }) => {
   return (
     <ImageList
       sx={{
-        padding: "40px",
+        padding: "20px",
         margin: `${data?.layout?.space_bt_img}px !important`,
-        gap: `${data?.layout?.space_bt_img}px !important`,
-        overflow: "visible", // Change to visible
+        gap: `${data?.layout?.space_bt_img * 10}px !important`,
+        overflow: "visible",
       }}
       variant="masonry"
       cols={3}
@@ -33,7 +33,7 @@ const CollageGallery = ({ data }) => {
             alt={file.title}
             loading="lazy"
             style={{
-              margin: `${data?.layout?.space_bt_img}px `,
+              margin: `${data?.layout?.space_bt_img}px`,
               border: ` ${data?.layout?.border_size}px solid ${data?.layout?.border_color} `,
               borderRadius: `${data?.layout?.border_round}%`,
               // objectFit: "cover",
@@ -94,7 +94,6 @@ const CollageGallery = ({ data }) => {
                       left: "50%",
                       // transform: "translateX(-50%)",
                       transform: "scale(1)",
-
                       backgroundColor: "white",
                       border: "1px solid #ccc",
                       boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",

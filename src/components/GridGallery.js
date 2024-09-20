@@ -115,68 +115,82 @@ const GridGallery = ({ data }) => {
                           />
                         </div>
 
-                        {
-                          <div
-                            style={{
-                              borderRadius: "10px",
-                              display: "none",
-                              // position: "absolute",
-                              top: "-120%",
-                              left: "50%",
-                              // transform: "translateX(-50%)",
-                              transform: "scale(1)",
+                        <div
+                          // style={{
+                          //   borderRadius: "10px",
+                          //   display: "none",
+                          //   // position: "absolute",
+                          //   top: "-120%",
+                          //   left: "50%",
+                          //   // transform: "translateX(-50%)",
+                          //   transform: "scale(1)",
 
-                              backgroundColor: "white",
-                              border: "1px solid #ccc",
-                              boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
-                              padding: "5px",
-                              zIndex: 1000,
-                              width: "140px",
-                              textAlign: "center",
+                          //   backgroundColor: "white",
+                          //   border: "1px solid #ccc",
+                          //   boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+                          //   padding: "5px",
+                          //   zIndex: 1000,
+                          //   width: "140px",
+                          //   textAlign: "center",
+                          // }}
+
+                          style={{
+                            borderRadius: "10px",
+                            display: "none",
+                            top: "50%",
+                            left: "50%",
+                            transform: "scale(1)  (-50%, -50%)",
+                            backgroundColor: "white",
+                            border: "1px solid rgb(204, 204, 204)",
+                            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.1)",
+                            padding: "5px",
+                            zIndex: 1000,
+                            width: "140px",
+                            textAlign: "center",
+                            position: "absolute",
+                          }}
+                          className="tag-preview"
+                        >
+                          <img
+                            src={p?.image}
+                            alt={p?.name}
+                            style={{
+                              width: "100px",
+                              height: "auto",
+                              borderRadius: "5px",
                             }}
-                            className="tag-preview"
+                          />
+                          <p
+                            style={{
+                              fontSize: "14px",
+                              margin: "10px 0 5px 0",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                            }}
                           >
-                            <img
-                              src={p?.image}
-                              alt={p?.name}
-                              style={{
-                                width: "100px",
-                                height: "auto",
-                                borderRadius: "5px",
-                              }}
-                            />
-                            <p
-                              style={{
-                                fontSize: "14px",
-                                margin: "10px 0 5px 0",
-                                whiteSpace: "nowrap",
-                                overflow: "hidden",
-                                textOverflow: "ellipsis",
-                              }}
-                            >
-                              {p?.name}
-                            </p>
-                            <p
-                              style={{
-                                fontSize: "13px",
-                                color: "gray",
-                                margin: "0",
-                              }}
-                            >
-                              ${p?.price}
-                            </p>
-                            <p
-                              style={{
-                                fontSize: "13px",
-                                color: "#007BFF",
-                                marginTop: "8px",
-                                cursor: "pointer",
-                              }}
-                            >
-                              View Product
-                            </p>
-                          </div>
-                        }
+                            {p?.name}
+                          </p>
+                          <p
+                            style={{
+                              fontSize: "13px",
+                              color: "gray",
+                              margin: "0",
+                            }}
+                          >
+                            ${p?.price}
+                          </p>
+                          <p
+                            style={{
+                              fontSize: "13px",
+                              color: "#007BFF",
+                              marginTop: "8px",
+                              cursor: "pointer",
+                            }}
+                          >
+                            View Product
+                          </p>
+                        </div>
                       </div>
                     );
                   })}
