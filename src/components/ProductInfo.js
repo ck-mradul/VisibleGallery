@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import { Popover } from "@mui/material";
 
-const ProductInfo = ({ p }) => {
+const ProductInfo = ({ p, cart, share }) => {
+  console.log("cart", cart);
+  console.log("share", share);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openPopoverId, setOpenPopoverId] = useState(null); // Track the open popover by product ID
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const popoverTimeoutRef = useRef(null);
 
   const handlePopoverOpen = (event, productId) => {
     setAnchorEl(event.currentTarget);
     setOpenPopoverId(productId);
+    setIsPopoverOpen(true);
+    if (popoverTimeoutRef.current) clearTimeout(popoverTimeoutRef.current);
   };
 
   const handlePopoverClose = () => {
-    setAnchorEl(null);
-    setOpenPopoverId(null);
+    popoverTimeoutRef.current = setTimeout(() => {
+      setAnchorEl(null);
+      setOpenPopoverId(null);
+      setIsPopoverOpen(false);
+    }, 300);
   };
 
-  const open = Boolean(anchorEl);
+  const open = Boolean(anchorEl) && isPopoverOpen;
   const { coordinate_y, coordinate_x } = p;
 
   return (
@@ -29,7 +38,7 @@ const ProductInfo = ({ p }) => {
         transform: "translate(-50%, -50%)",
       }}
       onMouseEnter={(event) => handlePopoverOpen(event, p.product_id)}
-      //   onMouseLeave={handlePopoverClose}
+      onMouseLeave={handlePopoverClose}
     >
       <div className="tooltipicon">
         <AddCircleOutlineSharpIcon
@@ -44,9 +53,8 @@ const ProductInfo = ({ p }) => {
       </div>
       {openPopoverId === p.product_id && (
         <Popover
-          in={true}
+          in="mouse-over-popover"
           id="mouse-over-popover"
-          sx={{ pointerEvents: "none" }}
           open={open}
           anchorEl={anchorEl}
           anchorOrigin={{
@@ -59,8 +67,25 @@ const ProductInfo = ({ p }) => {
           }}
           onClose={handlePopoverClose}
           disableRestoreFocus
+          // PaperProps={{
+          componentsProps={{
+            onMouseEnter: () => {
+              if (popoverTimeoutRef.current)
+                clearTimeout(popoverTimeoutRef.current);
+            },
+            onMouseLeave: handlePopoverClose,
+          }}
         >
-          <div className="tag-preview">
+          <div
+            className="tag-preview"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+              padding: "10px",
+            }}
+          >
             <img
               src={p?.image}
               alt={p?.name}
@@ -69,6 +94,7 @@ const ProductInfo = ({ p }) => {
                 height: "auto",
                 borderRadius: "5px",
               }}
+              loading="lazy"
             />
             <p
               style={{
@@ -97,29 +123,36 @@ const ProductInfo = ({ p }) => {
                 marginTop: "8px",
                 cursor: "pointer",
               }}
+              onClick={() => console.log("button_clicked")}
             >
               View Product
             </p>
-            <p
-              style={{
-                fontSize: "13px",
-                color: "#007BFF",
-                marginTop: "8px",
-                cursor: "pointer",
-              }}
-            >
-              Add to Cart
-            </p>
-            <p
-              style={{
-                fontSize: "13px",
-                color: "#007BFF",
-                marginTop: "8px",
-                cursor: "pointer",
-              }}
-            >
-              Share Product
-            </p>
+            {cart && (
+              <p
+                style={{
+                  fontSize: "13px",
+                  color: "#007BFF",
+                  marginTop: "8px",
+                  cursor: "pointer",
+                }}
+                onClick={() => console.log("button_clicked")}
+              >
+                Add to Cart
+              </p>
+            )}
+            {share && (
+              <p
+                style={{
+                  fontSize: "13px",
+                  color: "#007BFF",
+                  marginTop: "8px",
+                  cursor: "pointer",
+                }}
+                onClick={() => console.log("button_clicked")}
+              >
+                Share Product
+              </p>
+            )}
           </div>
         </Popover>
       )}

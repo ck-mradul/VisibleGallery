@@ -28,14 +28,13 @@ const Selector = () => {
   // const [loading, setLoading] = useState(true); // State to manage loading
   // const [error, setError] = useState(null); // State to handle errors
   useEffect(() => {
-    const fetchSingleGallerys = async (id = 2) => {
+    const fetchSingleGallerys = async (id = 3) => {
       try {
         const response = await axiosInstance.post(
           `/getLayoutWithGalleryCordinates?layout_id=${id}`
         );
 
         setLayoutId(id);
-
         if (response.status !== 200) {
           throw new Error("Network response was not ok");
         }

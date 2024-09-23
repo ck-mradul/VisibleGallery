@@ -76,7 +76,14 @@ const GridGallery = ({ data }) => {
 
                 {item?.product?.length > 0 &&
                   item.product.map((p, index) => {
-                    return <ProductInfo p={p} />;
+                    return (
+                      <ProductInfo
+                        p={p}
+                        key={index}
+                        cart={data?.layout?.add_to_cart}
+                        share={data?.layout?.share_product}
+                      />
+                    );
                   })}
               </div>
             </Slide>
