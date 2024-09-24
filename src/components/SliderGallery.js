@@ -3,10 +3,38 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
 import ProductInfo from "./ProductInfo";
+import { Dialog, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
 
 const SliderGallery = ({ data }) => {
+  const [openDialog, setOpenDialog] = useState(false);
+  const [clickedImage, setClickedImage] = useState(null);
+
+  const handleImageClick = (index) => {
+    console.log("data?.image", data?.image);
+    const clickedImage = data?.image[index];
+    console.log("clickedImage", clickedImage);
+    const file = clickedImage.file ? clickedImage.file : clickedImage;
+    let src;
+
+    if (file && file.file_name) {
+      src = file.file_name;
+    } else if (file && file.file) {
+      src = URL.createObjectURL(file.file);
+    }
+
+    setClickedImage({
+      src: src,
+      alt: `Image ${index + 1}`,
+    });
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
   const NextArrow = ({ onClick }) => {
     return (
       <div
@@ -49,6 +77,7 @@ const SliderGallery = ({ data }) => {
     selectedColor,
     borderRoundness,
     img_in_column,
+    space,
   }) => {
     const settings = {
       dots: false,
@@ -130,6 +159,8 @@ const SliderGallery = ({ data }) => {
                     display: "block",
                     maxWidth: "90%",
                     maxHeight: "90%",
+                    marginLeft: `${space}px`,
+                    marginRight: `${space}px`,
                     // width: "100%",
                     // boxSizing: "border-box",
                     // height: "100%",
@@ -137,6 +168,7 @@ const SliderGallery = ({ data }) => {
                     borderRadius: `${borderRoundness}%`,
                     border: `solid ${borderSize}px ${selectedColor}`,
                   }}
+                  onClick={() => handleImageClick(index)}
                   loading="lazy"
                 />
                 {item?.product?.length > 0 &&
@@ -159,14 +191,40 @@ const SliderGallery = ({ data }) => {
   };
 
   return (
-    <MySlider
-      uploadedFiles={data?.image}
-      //   handleImageClick={handleImageClick}
-      borderSize={data?.layout?.border_size}
-      selectedColor={data?.layout?.border_color}
-      img_in_column={data?.layout?.img_in_column}
-      borderRoundness={data?.layout?.border_round}
-    />
+    <>
+      <MySlider
+        uploadedFiles={data?.image}
+        //   handleImageClick={handleImageClick}
+        borderSize={data?.layout?.border_size}
+        selectedColor={data?.layout?.border_color}
+        img_in_column={data?.layout?.img_in_column}
+        borderRoundness={data?.layout?.border_round}
+        space={data?.layout?.space_bt_img}
+      />
+
+      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md">
+        {clickedImage && (
+          <img
+            src={clickedImage.src}
+            alt={clickedImage.alt}
+            style={{ width: "auto", height: "auto", overflow: "hidden" }}
+          />
+        )}
+
+        <IconButton
+          aria-label="close"
+          onClick={handleCloseDialog}
+          sx={(theme) => ({
+            position: "absolute",
+            right: 8,
+            top: 8,
+            color: theme.palette.grey[500],
+          })}
+        >
+          <CloseIcon />
+        </IconButton>
+      </Dialog>
+    </>
   );
 };
 export default SliderGallery;

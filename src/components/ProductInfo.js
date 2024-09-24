@@ -3,8 +3,6 @@ import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp
 import { Popover } from "@mui/material";
 
 const ProductInfo = ({ p, cart, share }) => {
-  console.log("cart", cart);
-  console.log("share", share);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openPopoverId, setOpenPopoverId] = useState(null); // Track the open popover by product ID
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -67,8 +65,8 @@ const ProductInfo = ({ p, cart, share }) => {
           }}
           onClose={handlePopoverClose}
           disableRestoreFocus
-          // PaperProps={{
-          componentsProps={{
+          PaperProps={{
+            // componentsProps={{
             onMouseEnter: () => {
               if (popoverTimeoutRef.current)
                 clearTimeout(popoverTimeoutRef.current);
