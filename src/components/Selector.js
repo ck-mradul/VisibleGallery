@@ -28,7 +28,7 @@ const Selector = () => {
   // const [loading, setLoading] = useState(true); // State to manage loading
   // const [error, setError] = useState(null); // State to handle errors
   useEffect(() => {
-    const fetchSingleGallerys = async (id = 3) => {
+    const fetchSingleGallerys = async (id = 1) => {
       try {
         const response = await axiosInstance.post(
           `/getLayoutWithGalleryCordinates?layout_id=${id}`

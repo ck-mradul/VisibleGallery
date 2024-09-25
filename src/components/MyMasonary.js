@@ -1,22 +1,20 @@
 import { Masonry } from "@mui/lab";
 import Slide from "react-reveal/Slide";
 import ProductInfo from "./ProductInfo";
-import { Dialog, IconButton } from "@mui/material";
 import { useState } from "react";
-// import { CloseIcon } from "yet-another-react-lightbox";
 
-import CloseIcon from "@mui/icons-material/Close";
+import FullScreenDailog from "./FullScreenDailog";
 
 const MyMasonary = ({ data }) => {
   const slideDurations = [800, 1000, 900, 1200, 1100];
 
   const [openDialog, setOpenDialog] = useState(false);
   const [clickedImage, setClickedImage] = useState(null);
+  const [clickedProductInfo, setClickedProductInfo] = useState([]);
 
   const handleImageClick = (index) => {
-    console.log("data?.image", data?.image);
     const clickedImage = data?.image[index];
-    console.log("clickedImage", clickedImage);
+
     const file = clickedImage.file ? clickedImage.file : clickedImage;
     let src;
 
@@ -25,6 +23,7 @@ const MyMasonary = ({ data }) => {
     } else if (file && file.file) {
       src = URL.createObjectURL(file.file);
     }
+    setClickedProductInfo(clickedImage.product || []);
 
     setClickedImage({
       src: src,
@@ -88,7 +87,14 @@ const MyMasonary = ({ data }) => {
         ))}
       </Masonry>
 
-      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md">
+      <FullScreenDailog
+        open={openDialog}
+        image={clickedImage}
+        productInfo={clickedProductInfo}
+        onClose={handleCloseDialog}
+        layout={data?.layout}
+      />
+      {/* <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md">
         {clickedImage && (
           <img
             src={clickedImage.src}
@@ -109,7 +115,7 @@ const MyMasonary = ({ data }) => {
         >
           <CloseIcon />
         </IconButton>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };

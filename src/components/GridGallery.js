@@ -4,13 +4,13 @@ import Slide from "react-reveal/Slide";
 import React, { useState } from "react";
 import ProductInfo from "./ProductInfo";
 // import { CloseIcon } from "yet-another-react-lightbox";
-import CloseIcon from "@mui/icons-material/Close";
-import { Dialog, IconButton } from "@mui/material";
+import FullScreenDailog from "./FullScreenDailog";
 
 const GridGallery = ({ data }) => {
   const slideDurations = [800, 1000, 900, 1200, 1100];
   const [openDialog, setOpenDialog] = useState(false);
   const [clickedImage, setClickedImage] = useState(null);
+  const [clickedProductInfo, setClickedProductInfo] = useState([]);
 
   const handleImageClick = (index) => {
     const clickedImage = data?.image[index];
@@ -22,6 +22,7 @@ const GridGallery = ({ data }) => {
     } else if (file && file.file) {
       src = URL.createObjectURL(file.file);
     }
+    setClickedProductInfo(clickedImage.product || []);
 
     setClickedImage({
       src: src,
@@ -40,6 +41,7 @@ const GridGallery = ({ data }) => {
         sx={{
           padding: "20px",
           gap: `${data?.layout?.space_bt_img}px !important`,
+          overflowY: "hidden",
         }}
         cols={data?.layout?.img_in_column}
       >
@@ -86,8 +88,14 @@ const GridGallery = ({ data }) => {
           );
         })}
       </ImageList>
-
-      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md">
+      <FullScreenDailog
+        open={openDialog}
+        image={clickedImage}
+        productInfo={clickedProductInfo}
+        onClose={handleCloseDialog}
+        layout={data?.layout}
+      />
+      {/* <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md">
         {clickedImage && (
           <img
             src={clickedImage.src}
@@ -95,7 +103,21 @@ const GridGallery = ({ data }) => {
             style={{ width: "auto", height: "auto", overflow: "hidden" }}
           />
         )}
-
+        {clickedProductInfo.length > 0 &&
+          clickedProductInfo.map((p, idx) => (
+            <ProductInfo
+              p={p}
+              key={idx}
+              cart={data?.layout?.add_to_cart}
+              share={data?.layout?.share_product}
+              style={{
+                position: "absolute",
+                top: `${p.coordinate_y}%`, // Example positioning
+                left: `${p.coordinate_x}%`, // Example positioning
+                zIndex: 2,
+              }}
+            />
+          ))}
         <IconButton
           aria-label="close"
           onClick={handleCloseDialog}
@@ -108,7 +130,7 @@ const GridGallery = ({ data }) => {
         >
           <CloseIcon />
         </IconButton>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };

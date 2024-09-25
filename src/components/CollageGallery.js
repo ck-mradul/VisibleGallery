@@ -1,18 +1,16 @@
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ProductInfo from "./ProductInfo";
-import { Dialog, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
+import FullScreenDailog from "./FullScreenDailog";
 
 const CollageGallery = ({ data }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [clickedImage, setClickedImage] = useState(null);
+  const [clickedProductInfo, setClickedProductInfo] = useState([]);
 
   const handleImageClick = (index) => {
-    console.log("data?.image", data?.image);
     const clickedImage = data?.image[index];
-    console.log("clickedImage", clickedImage);
     const file = clickedImage.file ? clickedImage.file : clickedImage;
     let src;
 
@@ -21,6 +19,7 @@ const CollageGallery = ({ data }) => {
     } else if (file && file.file) {
       src = URL.createObjectURL(file.file);
     }
+    setClickedProductInfo(clickedImage.product || []);
 
     setClickedImage({
       src: src,
@@ -89,7 +88,14 @@ const CollageGallery = ({ data }) => {
           </ImageListItem>
         ))}
       </ImageList>
-      <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md">
+      <FullScreenDailog
+        open={openDialog}
+        image={clickedImage}
+        productInfo={clickedProductInfo}
+        onClose={handleCloseDialog}
+        layout={data?.layout}
+      />
+      {/* <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md">
         {clickedImage && (
           <img
             src={clickedImage.src}
@@ -110,7 +116,7 @@ const CollageGallery = ({ data }) => {
         >
           <CloseIcon />
         </IconButton>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };

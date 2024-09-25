@@ -4,18 +4,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import ProductInfo from "./ProductInfo";
-import { Dialog, IconButton } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
+import FullScreenDailog from "./FullScreenDailog";
 
 const SliderGallery = ({ data }) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [clickedImage, setClickedImage] = useState(null);
+  const [clickedProductInfo, setClickedProductInfo] = useState([]);
 
   const handleImageClick = (index) => {
-    console.log("data?.image", data?.image);
     const clickedImage = data?.image[index];
-    console.log("clickedImage", clickedImage);
     const file = clickedImage.file ? clickedImage.file : clickedImage;
     let src;
 
@@ -24,6 +22,7 @@ const SliderGallery = ({ data }) => {
     } else if (file && file.file) {
       src = URL.createObjectURL(file.file);
     }
+    setClickedProductInfo(clickedImage.product || []);
 
     setClickedImage({
       src: src,
@@ -202,6 +201,15 @@ const SliderGallery = ({ data }) => {
         space={data?.layout?.space_bt_img}
       />
 
+      <FullScreenDailog
+        open={openDialog}
+        image={clickedImage}
+        productInfo={clickedProductInfo}
+        onClose={handleCloseDialog}
+        layout={data?.layout}
+      />
+
+      {/* 
       <Dialog open={openDialog} onClose={handleCloseDialog} maxWidth="md">
         {clickedImage && (
           <img
@@ -223,7 +231,7 @@ const SliderGallery = ({ data }) => {
         >
           <CloseIcon />
         </IconButton>
-      </Dialog>
+      </Dialog> */}
     </>
   );
 };
