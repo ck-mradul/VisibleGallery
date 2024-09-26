@@ -43,8 +43,9 @@ const ProductInfo = ({ p, cart, share }) => {
           style={{
             transform: "scale(1.5)",
             borderRadius: "50%",
-            // transformOrigin: "center",
-            backgroundColor: "rgba(255, 255, 255, 0.2)",
+            color: "#FFFFFF",
+            backgroundColor: "black",
+            // backgroundColor: "rgba(255, 255, 255, 0.2)",
             filter: "drop-shadow(0 0 5px rgba(0, 0, 0, 0.7))",
           }}
         />

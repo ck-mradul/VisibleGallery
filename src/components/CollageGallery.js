@@ -41,7 +41,8 @@ const CollageGallery = ({ data }) => {
           overflow: "visible",
         }}
         variant="masonry"
-        cols={3}
+        // cols={3}
+        cols={data?.layout?.img_in_column}
         gap={8}
       >
         {data?.image.map((file, index) => (
