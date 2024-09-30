@@ -7,7 +7,7 @@ const FullScreenDailog = ({ open, image, productInfo, onClose, layout }) => {
     return <></>;
   }
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="md">
+    <Dialog open={open} onClose={onClose}>
       {image && (
         <img
           src={image.src}

@@ -37,57 +37,61 @@ const GridGallery = ({ data }) => {
 
   return (
     <>
-      <ImageList
-        sx={{
-          padding: "20px",
-          gap: `${data?.layout?.space_bt_img}px !important`,
-          overflowY: "hidden",
-        }}
-        cols={data?.layout?.img_in_column}
-      >
-        {data?.image.map((item, index) => {
-          // function handleModelImage(event) {
-          //   const rect = event.currentTarget.getBoundingClientRect();
-          //   const offsetX = event.clientX - rect.left;
-          //   const offsetY = event.clientY - rect.top;
-          // }
-          return (
-            <ImageListItem key={item?.id}>
-              <Slide duration={slideDurations[index]} bottom>
-                <div style={{ position: "relative" }}>
-                  <img
-                    src={item?.file_name}
-                    alt={index}
-                    // onClick={(event) =>
-                    //   handleModelImage(event, item?.image_url, item?.id)
-                    // }
-                    style={{
-                      height: "40vh",
-                      width: "40vh",
-                      border: `solid ${data?.layout?.border_size}px ${data?.layout?.border_color}`,
-                      borderRadius: `${data?.layout?.border_round}%`,
-                    }}
-                    onClick={() => handleImageClick(index)}
-                    loading="lazy"
-                  />
+      {data?.image?.length > 0 ? (
+        <ImageList
+          sx={{
+            padding: "20px",
+            gap: `${data?.layout?.space_bt_img}px !important`,
+            overflowY: "hidden",
+          }}
+          cols={data?.layout?.img_in_column}
+        >
+          {data?.image.map((item, index) => {
+            // function handleModelImage(event) {
+            //   const rect = event.currentTarget.getBoundingClientRect();
+            //   const offsetX = event.clientX - rect.left;
+            //   const offsetY = event.clientY - rect.top;
+            // }
+            return (
+              <ImageListItem key={item?.id}>
+                <Slide duration={slideDurations[index]} bottom>
+                  <div style={{ position: "relative" }}>
+                    <img
+                      src={item?.file_name}
+                      alt={index}
+                      // onClick={(event) =>
+                      //   handleModelImage(event, item?.image_url, item?.id)
+                      // }
+                      style={{
+                        height: "40vh",
+                        width: "40vh",
+                        border: `solid ${data?.layout?.border_size}px ${data?.layout?.border_color}`,
+                        borderRadius: `${data?.layout?.border_round}%`,
+                      }}
+                      onClick={() => handleImageClick(index)}
+                      loading="lazy"
+                    />
 
-                  {item?.product?.length > 0 &&
-                    item.product.map((p, index) => {
-                      return (
-                        <ProductInfo
-                          p={p}
-                          key={index}
-                          cart={data?.layout?.add_to_cart}
-                          share={data?.layout?.share_product}
-                        />
-                      );
-                    })}
-                </div>
-              </Slide>
-            </ImageListItem>
-          );
-        })}
-      </ImageList>
+                    {item?.product?.length > 0 &&
+                      item.product.map((p, index) => {
+                        return (
+                          <ProductInfo
+                            p={p}
+                            key={index}
+                            cart={data?.layout?.add_to_cart}
+                            share={data?.layout?.share_product}
+                          />
+                        );
+                      })}
+                  </div>
+                </Slide>
+              </ImageListItem>
+            );
+          })}
+        </ImageList>
+      ) : (
+      <></>
+      )}
       <FullScreenDailog
         open={openDialog}
         image={clickedImage}
