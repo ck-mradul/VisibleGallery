@@ -4,14 +4,17 @@ import { Popover } from "@mui/material";
 
 const ProductInfo = ({ p, cart, share }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [openPopoverId, setOpenPopoverId] = useState(null); // Track the open popover by product ID
+  const [openPopoverId, setOpenPopoverId] = useState(null);
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const popoverTimeoutRef = useRef(null);
+  const [isPulsing, setIsPulsing] = useState(true);
 
   const handlePopoverOpen = (event, productId) => {
     setAnchorEl(event.currentTarget);
     setOpenPopoverId(productId);
     setIsPopoverOpen(true);
+    setIsPulsing(false);
+
     if (popoverTimeoutRef.current) clearTimeout(popoverTimeoutRef.current);
   };
 
@@ -20,6 +23,7 @@ const ProductInfo = ({ p, cart, share }) => {
       setAnchorEl(null);
       setOpenPopoverId(null);
       setIsPopoverOpen(false);
+      setIsPulsing(true);
     }, 300);
   };
 
@@ -38,14 +42,29 @@ const ProductInfo = ({ p, cart, share }) => {
       onMouseEnter={(event) => handlePopoverOpen(event, p.product_id)}
       onMouseLeave={handlePopoverClose}
     >
+      <style>
+        {`
+          .pulsing-icon {
+          animation: blinker 5s linear infinite;
+          }
+          @keyframes blinker {
+          50% {
+          opacity: 0;
+          }
+          }
+            .pulsing-icon.no-pulse {
+            animation: none;
+          }
+        `}
+      </style>
       <div className="tooltipicon">
         <AddCircleOutlineSharpIcon
+          className={`pulsing-icon ${isPulsing ? "" : "no-pulse"}`}
           style={{
-            transform: "scale(1.5)",
+            transform: "scale(1.0)",
             borderRadius: "50%",
             color: "#FFFFFF",
             backgroundColor: "black",
-            // backgroundColor: "rgba(255, 255, 255, 0.2)",
             filter: "drop-shadow(0 0 5px rgba(0, 0, 0, 0.7))",
           }}
         />
